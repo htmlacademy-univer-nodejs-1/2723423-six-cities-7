@@ -1,0 +1,158 @@
+{
+  "offers": [
+    {
+      "title": "Квартира у тихого канала",
+      "description": "Светлая квартира рядом с каналом, кафе и музеями в центре города.",
+      "city": "Amsterdam",
+      "previewImage": "https://placehold.co/800x600/png?text=Amsterdam-1-1",
+      "images": [
+        "https://placehold.co/800x600/png?text=Amsterdam-1-1",
+        "https://placehold.co/800x600/png?text=Amsterdam-1-2",
+        "https://placehold.co/800x600/png?text=Amsterdam-1-3",
+        "https://placehold.co/800x600/png?text=Amsterdam-1-4",
+        "https://placehold.co/800x600/png?text=Amsterdam-1-5",
+        "https://placehold.co/800x600/png?text=Amsterdam-1-6"
+      ],
+      "housingType": "apartment",
+      "amenities": [
+        "Washer",
+        "Towels",
+        "Fridge"
+      ],
+      "author": {
+        "name": "Anna",
+        "email": "anna@example.com",
+        "avatar": "https://placehold.co/128x128/png?text=Anna",
+        "password": "password123",
+        "type": "pro"
+      },
+      "location": {
+        "latitude": 52.370216,
+        "longitude": 4.895168
+      }
+    },
+    {
+      "title": "Дом у городского парка",
+      "description": "Просторный дом рядом с парком для спокойного семейного отдыха.",
+      "city": "Paris",
+      "previewImage": "https://placehold.co/800x600/png?text=Paris-2-1",
+      "images": [
+        "https://placehold.co/800x600/png?text=Paris-2-1",
+        "https://placehold.co/800x600/png?text=Paris-2-2",
+        "https://placehold.co/800x600/png?text=Paris-2-3",
+        "https://placehold.co/800x600/png?text=Paris-2-4",
+        "https://placehold.co/800x600/png?text=Paris-2-5",
+        "https://placehold.co/800x600/png?text=Paris-2-6"
+      ],
+      "housingType": "house",
+      "amenities": [
+        "Breakfast",
+        "Baby seat",
+        "Air conditioning"
+      ],
+      "author": {
+        "name": "Max",
+        "email": "max@example.com",
+        "avatar": "https://placehold.co/128x128/png?text=Max",
+        "password": "password123",
+        "type": "regular"
+      },
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499
+      }
+    },
+    {
+      "title": "Студия в старом городе",
+      "description": "Уютная студия с удобным рабочим местом недалеко от собора.",
+      "city": "Cologne",
+      "previewImage": "https://placehold.co/800x600/png?text=Cologne-3-1",
+      "images": [
+        "https://placehold.co/800x600/png?text=Cologne-3-1",
+        "https://placehold.co/800x600/png?text=Cologne-3-2",
+        "https://placehold.co/800x600/png?text=Cologne-3-3",
+        "https://placehold.co/800x600/png?text=Cologne-3-4",
+        "https://placehold.co/800x600/png?text=Cologne-3-5",
+        "https://placehold.co/800x600/png?text=Cologne-3-6"
+      ],
+      "housingType": "room",
+      "amenities": [
+        "Laptop friendly workspace",
+        "Fridge"
+      ],
+      "author": {
+        "name": "Lena",
+        "email": "lena@example.com",
+        "avatar": "https://placehold.co/128x128/png?text=Lena",
+        "password": "password123",
+        "type": "regular"
+      },
+      "location": {
+        "latitude": 50.938361,
+        "longitude": 6.959974
+      }
+    },
+    {
+      "title": "Отель возле площади",
+      "description": "Комфортный номер в центре города с завтраком и кондиционером.",
+      "city": "Brussels",
+      "previewImage": "https://placehold.co/800x600/png?text=Brussels-4-1",
+      "images": [
+        "https://placehold.co/800x600/png?text=Brussels-4-1",
+        "https://placehold.co/800x600/png?text=Brussels-4-2",
+        "https://placehold.co/800x600/png?text=Brussels-4-3",
+        "https://placehold.co/800x600/png?text=Brussels-4-4",
+        "https://placehold.co/800x600/png?text=Brussels-4-5",
+        "https://placehold.co/800x600/png?text=Brussels-4-6"
+      ],
+      "housingType": "hotel",
+      "amenities": [
+        "Breakfast",
+        "Air conditioning",
+        "Towels"
+      ],
+      "author": {
+        "name": "Pavel",
+        "email": "pavel@example.com",
+        "avatar": "https://placehold.co/128x128/png?text=Pavel",
+        "password": "password123",
+        "type": "pro"
+      },
+      "location": {
+        "latitude": 50.846557,
+        "longitude": 4.351697
+      }
+    },
+    {
+      "title": "Апартаменты рядом с портом",
+      "description": "Современные апартаменты с видом на порт и всеми удобствами.",
+      "city": "Hamburg",
+      "previewImage": "https://placehold.co/800x600/png?text=Hamburg-5-1",
+      "images": [
+        "https://placehold.co/800x600/png?text=Hamburg-5-1",
+        "https://placehold.co/800x600/png?text=Hamburg-5-2",
+        "https://placehold.co/800x600/png?text=Hamburg-5-3",
+        "https://placehold.co/800x600/png?text=Hamburg-5-4",
+        "https://placehold.co/800x600/png?text=Hamburg-5-5",
+        "https://placehold.co/800x600/png?text=Hamburg-5-6"
+      ],
+      "housingType": "apartment",
+      "amenities": [
+        "Washer",
+        "Fridge",
+        "Towels"
+      ],
+      "author": {
+        "name": "Maria",
+        "email": "maria@example.com",
+        "avatar": "https://placehold.co/128x128/png?text=Maria",
+        "password": "password123",
+        "type": "regular"
+      },
+      "location": {
+        "latitude": 53.550341,
+        "longitude": 10.000654
+      }
+    }
+  ]
+}

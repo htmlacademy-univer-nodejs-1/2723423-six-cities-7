@@ -1,6 +1,8 @@
 import {readFile} from 'node:fs/promises';
+import {once} from 'node:events';
 import {extname} from 'node:path';
 import chalk from 'chalk';
+import {generateOffers} from './generate.js';
 import {readOffers} from './tsv-reader.js';
 
 function help(): void {
@@ -12,7 +14,13 @@ function help(): void {
   --help                         Выводит справку (команда по умолчанию)
   --version                      Выводит версию приложения
   --import <filepath>             Читает TSV и выводит предложения в консоль
-  --generate <n> <filepath> <url>  Генерирует TSV (будет реализовано в следующем задании)`));
+  --generate <n> <filepath> <url>  Генерирует TSV из данных JSON-сервиса`));
+}
+
+async function print(text: string): Promise<void> {
+  if (!process.stdout.write(`${text}\n`)) {
+    await once(process.stdout, 'drain');
+  }
 }
 
 async function version(): Promise<void> {
@@ -30,10 +38,10 @@ async function importOffers(filePath: string): Promise<void> {
   }
   let count = 0;
   for await (const offer of readOffers(filePath)) {
-    console.log(chalk.cyan(JSON.stringify(offer, null, 2)));
+    await print(chalk.cyan(JSON.stringify(offer, null, 2)));
     count++;
   }
-  console.log(chalk.green(`Прочитано предложений: ${count}`));
+  await print(chalk.green(`Прочитано предложений: ${count}`));
 }
 
 export async function runCli(args: string[]): Promise<void> {
@@ -57,7 +65,22 @@ export async function runCli(args: string[]): Promise<void> {
       await importOffers(parameters[0]);
       break;
     case '--generate':
-      throw new Error('Команда --generate будет реализована в следующем задании');
+      if (parameters.length !== 3) {
+        throw new Error('Использование: --generate <n> <filepath> <url>');
+      }
+      {
+        const [amount, filePath, url] = parameters;
+        const count = Number(amount);
+        if (!Number.isSafeInteger(count) || count < 1) {
+          throw new Error('Количество предложений должно быть положительным целым числом');
+        }
+        if (extname(filePath).toLowerCase() !== '.tsv') {
+          throw new Error('Для генерации требуется файл с расширением .tsv');
+        }
+        await generateOffers(count, filePath, url);
+        await print(chalk.green(`Сгенерировано предложений: ${count}. Файл: ${filePath}`));
+      }
+      break;
     default:
       throw new Error(`Неизвестная команда: ${command}. Используйте --help`);
   }

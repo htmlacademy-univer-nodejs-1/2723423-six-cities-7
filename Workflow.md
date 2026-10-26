@@ -14,6 +14,27 @@ npm install
 
 В `package.json` предопределено несколько сценариев.
 
+#### Запустить тестовый JSON-сервис
+
+```bash
+npm run mock:server
+```
+
+Заготовки предложений будут доступны по адресу `http://localhost:3000/offers`.
+
+#### Сгенерировать и прочитать предложения
+
+В другом терминале:
+
+```bash
+npm run cli -- --generate 10 mocks/generated.tsv http://localhost:3000/offers
+npm run cli -- --import mocks/generated.tsv
+```
+
+
+Сгенерированные TSV-файлы исключены из Git. Файл `mocks/offers.tsv` остаётся
+исходным примером из предыдущего задания.
+
 #### Скомпилировать проект
 
 ```bash
