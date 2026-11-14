@@ -8,4 +8,8 @@ export class LoggerService {
   public info(message: string): void {
     this.logger.info(message);
   }
+
+  public error(message: string): void {
+    this.logger.error(message);
+  }
 }

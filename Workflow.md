@@ -22,18 +22,33 @@ npm run mock:server
 
 Заготовки предложений будут доступны по адресу `http://localhost:3000/offers`.
 
-#### Сгенерировать и прочитать предложения
+#### Сгенерировать предложения
 
 В другом терминале:
 
 ```bash
 npm run cli -- --generate 10 mocks/generated.tsv http://localhost:3000/offers
-npm run cli -- --import mocks/generated.tsv
 ```
 
 
 Сгенерированные TSV-файлы исключены из Git. Файл `mocks/offers.tsv` остаётся
 исходным примером из предыдущего задания.
+
+#### MongoDB и импорт
+
+Создайте `.env` по образцу `.env.example` и запустите Docker:
+
+```bash
+docker compose up -d
+```
+
+Импортируйте TSV, подставив логин и пароль из `.env`:
+
+```bash
+npm run cli -- --import mocks/offers.tsv 'mongodb://YOUR_USER:YOUR_PASSWORD@127.0.0.1:27017/six-cities?authSource=admin'
+```
+
+Просмотр данных: `http://127.0.0.1:8081` (mongo-express).
 
 #### Скомпилировать проект
 

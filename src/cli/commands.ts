@@ -2,18 +2,22 @@ import {readFile} from 'node:fs/promises';
 import {once} from 'node:events';
 import {extname} from 'node:path';
 import chalk from 'chalk';
+import {container} from '../container.js';
+import {DatabaseService} from '../database/database-service.js';
+import {OfferService} from '../modules/offer/offer-service.js';
+import {UserService} from '../modules/user/user-service.js';
 import {generateOffers} from './generate.js';
 import {readOffers} from './tsv-reader.js';
 
 function help(): void {
   console.log(chalk.cyan(`Программа для подготовки данных для REST API сервера.
 
-Пример: npm run cli -- --import mocks/offers.tsv
+Пример: npm run cli -- --import mocks/offers.tsv <mongodb-uri>
 
 Команды:
   --help                         Выводит справку (команда по умолчанию)
   --version                      Выводит версию приложения
-  --import <filepath>             Читает TSV и выводит предложения в консоль
+  --import <filepath> <mongodb-uri>  Сохраняет предложения из TSV в MongoDB
   --generate <n> <filepath> <url>  Генерирует TSV из данных JSON-сервиса`));
 }
 
@@ -32,16 +36,29 @@ async function version(): Promise<void> {
   console.log(chalk.green(data.version));
 }
 
-async function importOffers(filePath: string): Promise<void> {
+async function importOffers(filePath: string, uri: string): Promise<void> {
   if (extname(filePath).toLowerCase() !== '.tsv') {
     throw new Error('Для импорта требуется файл с расширением .tsv');
   }
-  let count = 0;
-  for await (const offer of readOffers(filePath)) {
-    await print(chalk.cyan(JSON.stringify(offer, null, 2)));
-    count++;
+
+  const database = container.get(DatabaseService);
+  await database.connect(uri);
+  try {
+    const users = container.get(UserService);
+    const offers = container.get(OfferService);
+    let count = 0;
+    for await (const offer of readOffers(filePath)) {
+      let author = await users.findByEmail(offer.author.email);
+      if (!author) {
+        author = await users.create(offer.author);
+      }
+      await offers.create(offer, author._id);
+      count++;
+    }
+    await print(chalk.green(`Импортировано предложений: ${count}`));
+  } finally {
+    await database.disconnect();
   }
-  await print(chalk.green(`Прочитано предложений: ${count}`));
 }
 
 export async function runCli(args: string[]): Promise<void> {
@@ -59,10 +76,10 @@ export async function runCli(args: string[]): Promise<void> {
       }
       break;
     case '--import':
-      if (parameters.length !== 1 || parameters[0].startsWith('--')) {
-        throw new Error('Использование: --import <filepath>');
+      if (parameters.length !== 2 || parameters[0].startsWith('--')) {
+        throw new Error('Использование: --import <filepath> <mongodb-uri>');
       }
-      await importOffers(parameters[0]);
+      await importOffers(parameters[0], parameters[1]);
       break;
     case '--generate':
       if (parameters.length !== 3) {
