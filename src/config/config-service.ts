@@ -48,4 +48,8 @@ export class ConfigService {
   public getPort(): number {
     return this.config.get('port');
   }
+
+  public getSalt(): string {
+    return this.config.get('salt');
+  }
 }
