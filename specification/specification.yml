@@ -34,7 +34,7 @@ paths:
       tags: [Offers]
       operationId: createOffer
       summary: Создать предложение
-      description: Автор определяется по токену. Количество комментариев устанавливается сервером.
+      description: Автор определяется по токену. Рейтинг, количество комментариев и состояние избранного рассчитываются сервером.
       security:
         - bearerAuth: []
       requestBody:
@@ -478,13 +478,6 @@ components:
             format: uri
         isPremium:
           type: boolean
-        isFavorite:
-          type: boolean
-        rating:
-          type: number
-          minimum: 1
-          maximum: 5
-          multipleOf: 0.1
         housingType:
           $ref: '#/components/schemas/HousingType'
         bedrooms:
@@ -519,8 +512,6 @@ components:
             - previewImage
             - images
             - isPremium
-            - isFavorite
-            - rating
             - housingType
             - bedrooms
             - maxAdults
@@ -558,6 +549,7 @@ components:
           $ref: '#/components/schemas/HousingType'
         isFavorite:
           type: boolean
+          description: Признак избранного для текущего пользователя.
         publishedAt:
           type: string
           format: date-time
@@ -570,9 +562,10 @@ components:
           type: boolean
         rating:
           type: number
-          minimum: 1
+          minimum: 0
           maximum: 5
           multipleOf: 0.1
+          description: Средняя оценка комментариев, 0 до первой оценки.
         commentCount:
           type: integer
           minimum: 0
