@@ -12,6 +12,7 @@ export type OfferDocument = {
   isPremium: boolean;
   isFavorite: boolean;
   rating: number;
+  ratingSum: number;
   housingType: HousingType;
   bedrooms: number;
   maxAdults: number;
@@ -32,8 +33,9 @@ const offerSchema = new Schema<OfferDocument>({
   previewImage: {type: String, required: true},
   images: {type: [String], required: true},
   isPremium: {type: Boolean, required: true},
-  isFavorite: {type: Boolean, required: true},
-  rating: {type: Number, required: true},
+  isFavorite: {type: Boolean, default: false},
+  rating: {type: Number, default: 0},
+  ratingSum: {type: Number, default: 0},
   housingType: {type: String, required: true},
   bedrooms: {type: Number, required: true},
   maxAdults: {type: Number, required: true},
